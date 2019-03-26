@@ -1,0 +1,38 @@
+<div class="error-msg">
+  {{ errorMsg }}
+</div>
+
+<form [formGroup]="ticketBookingForm" (ngSubmit)="bookShow()">
+  <label>
+    Enter Show No:
+    <input type="number" formControlName="showNo">
+  </label><button type="button" (click)="checkAvailability(ticketBookingForm.value.showNo)">Check Availability</button><br /><br />
+
+  <div *ngIf="isSeatsAvailable">
+    Available seats are: {{seatsAvailable}}<br /><br />
+    <label>
+      Enter Seats:
+      <input type="text" formControlName="seats">
+    </label>
+
+    <button type="submit">Book Show</button><br /><br />
+    <div *ngIf="isBooked">
+      Revenue: Rs. {{ currentRevenue.revenue }} <br />
+      Service Tax: Rs. {{ currentRevenue.servicetax }} <br />
+      Swachh Bharat Cess: Rs. {{ currentRevenue.swachhbharatcess }} <br />
+      Krishi Kalyan Cess: Rs. {{ currentRevenue.krishikalyancess }} <br />
+    </div>
+  </div>
+</form>
+
+<br />
+<hr>
+<br />
+<button (click)="showTotalRevenue()">Show Total Revenue</button>
+<br /><br />
+<div *ngIf="isTotalRevenue && totalRevenue">
+  Revenue: Rs. {{ totalRevenue.revenue }} <br />
+  Service Tax: Rs. {{ totalRevenue.servicetax }} <br />
+  Swachh Bharat Cess: Rs. {{ totalRevenue.swachhbharatcess }} <br />
+  Krishi Kalyan Cess: Rs. {{ totalRevenue.krishikalyancess }} <br />
+</div>
